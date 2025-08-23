@@ -1,0 +1,2 @@
+web: python backend/app.py
+release: python ml_model/train_model.py

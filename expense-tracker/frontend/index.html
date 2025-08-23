@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Expense Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-wallet"></i> Smart Expense Tracker</h1>
+            <p>AI-powered expense categorization and budget insights</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Add Expense Form -->
+            <section class="expense-form-section">
+                <h2><i class="fas fa-plus-circle"></i> Add New Expense</h2>
+                <form id="expenseForm" class="expense-form">
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input type="text" id="description" name="description" required 
+                               placeholder="e.g., Lunch at McDonald's">
+                        <div id="prediction" class="prediction-result"></div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="amount">Amount ($):</label>
+                            <input type="number" id="amount" name="amount" step="0.01" min="0.01" required
+                                   placeholder="0.00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select category</option>
+                                <option value="Food">🍔 Food</option>
+                                <option value="Transportation">🚗 Transportation</option>
+                                <option value="Entertainment">🎬 Entertainment</option>
+                                <option value="Other">📦 Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Notes (optional):</label>
+                        <textarea id="notes" name="notes" rows="2" 
+                                  placeholder="Additional notes..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Add Expense
+                    </button>
+                </form>
+            </section>
+
+            <!-- Dashboard -->
+            <section class="dashboard-section">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-chart-pie"></i> Spending Overview</h2>
+                    <div class="total-spending">
+                        <span class="total-label">Total Spending:</span>
+                        <span id="totalAmount" class="total-amount">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Spending by Category</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Monthly Trends</h3>
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Expenses -->
+            <section class="expenses-section">
+                <h2><i class="fas fa-list"></i> Recent Expenses</h2>
+                <div class="expenses-controls">
+                    <button id="refreshExpenses" class="btn btn-secondary">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                </div>
+                <div id="expensesList" class="expenses-list">
+                    <!-- Expenses will be loaded here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
